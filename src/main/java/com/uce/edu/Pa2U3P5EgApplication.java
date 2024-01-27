@@ -1,7 +1,5 @@
 package com.uce.edu;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,36 +24,32 @@ public class Pa2U3P5EgApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		Factura fac = new Factura();
-		fac.setCedula("1718411745");
-		fac.setFecha(LocalDateTime.now());
-		fac.setNumero("0001-02569");
-
-		DetalleFactura det1 = new DetalleFactura();
-		det1.setCantidad(4);
-		det1.setCodigoBarras("54556875");
-		det1.setFactura(fac);
-		det1.setNombreProducto("Coca Cola");
-
-		DetalleFactura det2 = new DetalleFactura();
-		det2.setCantidad(2);
-		det2.setCodigoBarras("456456");
-		det2.setFactura(fac);
-		det2.setNombreProducto("Leche Vita");
-		
-		List<DetalleFactura> detalle = new ArrayList<>();
-		detalle.add(det1);
-		detalle.add(det2);
-		
-		fac.setDetalleFactura(detalle);
-		
-		//this.facturaService.guardar(fac);
-		
-		Factura f1 = this.facturaService.buscarPorNumero("0001-02569");
-		for(DetalleFactura det: f1.getDetalleFactura()) {
-			System.out.println(det.getCodigoBarras());
+		System.out.println("INNER JOIN");
+		List<Factura> lista = this.facturaService.buscarFacturasInnerJoin();
+		for (Factura f : lista) {
+			System.out.println(f);
 		}
-		System.out.println(f1);
+		
+		System.out.println("RIGHT JOIN");
+		List<Factura> lista2 = this.facturaService.buscarFacturasRigthJoin();
+		for (Factura f : lista2) {
+			System.out.println(f.getNumero());
+		}
+		
+		System.out.println("LEFT JOIN");
+		List<Factura> lista3= this.facturaService.buscarFacturasLeftJoin();
+		for (Factura f : lista3) {
+			System.out.println(f);
+		}
+		
+		System.out.println("FULL JOIN");
+		List<Factura> lista4= this.facturaService.buscarFacturasFullJoin();
+		for (Factura f : lista4) {
+			System.out.println(f);
+			for(DetalleFactura d: f.getDetalleFactura()) {
+				System.out.println(d);
+			}
+		}
 	}
 
 }
