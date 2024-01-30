@@ -45,9 +45,9 @@ public class FacturaRepositoryImpl implements IFacturaRepository {
 		//El inner join con el join es lo mismo en el jpql, nos permite consultar lo mismo.
 		TypedQuery<Factura> myQuery = this.entityManager.createQuery("SELECT f FROM Factura f INNER JOIN f.detalleFactura d", Factura.class);
 		List<Factura> lista =myQuery.getResultList();
-		for(Factura f:lista) {
-			f.getDetalleFactura().size();
-		}
+		/*for(Factura f:lista) {
+			f.getDetalleFactura().size(); //señal
+		}*/
 		return lista;
 	}
 
@@ -82,5 +82,32 @@ public class FacturaRepositoryImpl implements IFacturaRepository {
 			f.getDetalleFactura().size();
 		}
 		return lista;
+	}
+
+	@Override
+	public List<Factura> seleccionarFacturasWhereJoin() {
+		// TODO Auto-generated method stub
+		
+		//SQL: SELECT f.* FROM factura f, detalle_factura d WHERE f.fact_id = d.defa_id_factura
+		
+		//Usando JPQL: SELECT f FROM Factura f, DetalleFactura d WHERE (didactica)f.id = d.factura.id
+		//d.factura --> representacion de una factura en una factura --> f= d.factura --> f es una representación de factura
+		
+		TypedQuery<Factura> myQuery = this.entityManager.createQuery("SELECT f FROM Factura f, DetalleFactura d WHERE f= d.factura", Factura.class);
+		List<Factura> lista =myQuery.getResultList();
+		for(Factura f:lista) {
+			f.getDetalleFactura().size(); //señal
+		}
+		return lista;
+	}
+
+	@Override
+	public List<Factura> seleccionarFacturasFetchJoin() {
+		// TODO Auto-generated method stub
+		//JPQL INNER JOIN: SELECT f FROM Factura f INNER JOIN f.detalleFactura d
+		//JPQL: SELECT f FROM Factura f JOIN FETCH f.detalleFactura d
+		TypedQuery<Factura> mYQuery = this.entityManager.createQuery("SELECT f FROM Factura f JOIN FETCH f.detalleFactura d", Factura.class);
+		
+		return mYQuery.getResultList();
 	}
 }
