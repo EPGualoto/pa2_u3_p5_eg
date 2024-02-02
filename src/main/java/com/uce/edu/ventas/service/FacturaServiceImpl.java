@@ -87,4 +87,10 @@ public class FacturaServiceImpl implements IFacturaService {
 		// TODO Auto-generated method stub
 		return this.iFacturaRepository.seleccionarFacturasDTO();
 	}
+
+	@Override
+	public List<Factura> buscarPorNumeroF(String numero) {
+		// TODO Auto-generated method stub
+		return this.iFacturaRepository.seleccionarPorNumeroF(numero);
+	}
 }

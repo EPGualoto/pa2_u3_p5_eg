@@ -1,4 +1,4 @@
-package com.uce.edu.reservas.repository.modelo;
+package com.uce.edu.repository.modelo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

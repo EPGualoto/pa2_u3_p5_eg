@@ -169,4 +169,17 @@ public class FacturaRepositoryImpl implements IFacturaRepository {
 		TypedQuery<FacturaDTO> myQuery = this.entityManager.createQuery("SELECT NEW com.uce.edu.ventas.repository.modelo.dto.FacturaDTO(f.numero, f.fecha) FROM Factura f", FacturaDTO.class);
 		return myQuery.getResultList();
 	}
+
+	@Override
+	public List<Factura> seleccionarPorNumeroF(String numero) {
+		// TODO Auto-generated method stub
+		TypedQuery<Factura> myQuery = entityManager.createQuery(
+				"SELECT f FROM Factura f FULL JOIN f.detalleFactura df WHERE f.numero = :numero", Factura.class);
+		myQuery.setParameter("numero", numero);
+		List<Factura> facturas = myQuery.getResultList();
+		for (Factura f : facturas) {
+			f.getDetalleFactura().size();
+		}
+		return facturas;
+	}
 }

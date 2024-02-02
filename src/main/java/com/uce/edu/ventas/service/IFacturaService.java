@@ -30,5 +30,8 @@ public interface IFacturaService {
 	public void borrar(Integer id);
 	
 	public List<FacturaDTO> buscarFacturasDTO();
+	
+	// Full Join
+	public List<Factura> buscarPorNumeroF(String numero);
 
 }
