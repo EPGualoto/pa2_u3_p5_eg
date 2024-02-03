@@ -36,4 +36,5 @@ public interface IFacturaRepository {
 
 	// Full Join
 	public List<Factura> seleccionarPorNumeroF(String numero);
+	
 }
