@@ -1,6 +1,5 @@
 package com.uce.edu.ventas.service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,57 +30,15 @@ public class FacturaServiceImpl implements IFacturaService {
 	}
 
 	@Override
-	@Transactional(value = TxType.REQUIRED)
+	@Transactional(value = TxType.REQUIRES_NEW)
 	public void guardar(Factura factura, Cliente cliente) {
 		// TODO Auto-generated method stub
 		// TransactionSynchronizationManager de support
 		System.out.println(TransactionSynchronizationManager.isActualTransactionActive());
-		System.out.println("paso el insert de factura");
+		System.out.println("Paso el insert de factura");
 		this.iFacturaRepository.insertar(factura);
-		System.out.println("paso el insert de cliente");
+		System.out.println("Paso el insert de cliente");
 		this.iClienteService.guardar(cliente);
-	}
-
-	@Override
-	public List<Factura> buscarFacturasInnerJoin() {
-		// TODO Auto-generated method stub
-		return this.iFacturaRepository.seleccionarFacturasInnerJoin();
-	}
-
-	@Override
-	public List<Factura> buscarFacturasRigthJoin() {
-		// TODO Auto-generated method stub
-		return this.iFacturaRepository.seleccionarFacturasRigthJoin();
-	}
-
-	@Override
-	public List<Factura> buscarFacturasLeftJoin() {
-		// TODO Auto-generated method stub
-		return this.iFacturaRepository.seleccionarFacturasLeftJoin();
-	}
-
-	@Override
-	public List<Factura> buscarFacturasFullJoin() {
-		// TODO Auto-generated method stub
-		return this.iFacturaRepository.seleccionarFacturasFullJoin();
-	}
-
-	@Override
-	public List<Factura> buscarFacturasWhereJoin() {
-		// TODO Auto-generated method stub
-		return this.iFacturaRepository.seleccionarFacturasWhereJoin();
-	}
-
-	@Override
-	public List<Factura> buscarFacturasFetchJoin() {
-		// TODO Auto-generated method stub
-		return this.iFacturaRepository.seleccionarFacturasFetchJoin();
-	}
-
-	@Override
-	public int actualizarFechas(LocalDateTime fechaNueva, LocalDateTime fechaActual) {
-		// TODO Auto-generated method stub
-		return this.iFacturaRepository.actualizarFechas(fechaNueva, fechaActual);
 	}
 
 	@Override
@@ -103,8 +60,12 @@ public class FacturaServiceImpl implements IFacturaService {
 	}
 
 	@Override
-	public List<Factura> buscarPorNumeroF(String numero) {
+	@Transactional(value = TxType.MANDATORY)
+	public void prueba() {
 		// TODO Auto-generated method stub
-		return this.iFacturaRepository.seleccionarPorNumeroF(numero);
+		System.out.println("Este metodo es de prueba");
+		System.out.println("Prueba:" + TransactionSynchronizationManager.isActualTransactionActive());
+
 	}
+
 }

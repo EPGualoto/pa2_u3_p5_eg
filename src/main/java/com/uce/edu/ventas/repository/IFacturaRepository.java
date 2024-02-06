@@ -1,6 +1,5 @@
 package com.uce.edu.ventas.repository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import com.uce.edu.ventas.repository.modelo.Factura;
@@ -15,26 +14,9 @@ public interface IFacturaRepository {
 
 	public void eliminar(Integer id);
 
-	public int actualizarFechas(LocalDateTime fechaNueva, LocalDateTime fechaActual);
-
 	public int eliminarPorNumero(String numero);
-
-	public List<Factura> seleccionarFacturasInnerJoin();
-
-	public List<Factura> seleccionarFacturasRigthJoin();
-
-	public List<Factura> seleccionarFacturasLeftJoin();
-
-	public List<Factura> seleccionarFacturasFullJoin();
-
-	public List<Factura> seleccionarFacturasWhereJoin();
-
-	public List<Factura> seleccionarFacturasFetchJoin();
 
 	// Consultar solo por los dos atributos
 	public List<FacturaDTO> seleccionarFacturasDTO();
 
-	// Full Join
-	public List<Factura> seleccionarPorNumeroF(String numero);
-	
 }
