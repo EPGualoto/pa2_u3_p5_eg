@@ -3,7 +3,6 @@ package com.uce.edu.ventas.repository;
 import java.util.List;
 
 import com.uce.edu.ventas.repository.modelo.Factura;
-import com.uce.edu.ventas.repository.modelo.dto.FacturaDTO;
 
 public interface IFacturaRepository {
 	public Factura seleccionarPorNumero(String numero);
@@ -16,7 +15,6 @@ public interface IFacturaRepository {
 
 	public int eliminarPorNumero(String numero);
 
-	// Consultar solo por los dos atributos
-	public List<FacturaDTO> seleccionarFacturasDTO();
+	public List<Factura> seleccionarTodos();
 
 }

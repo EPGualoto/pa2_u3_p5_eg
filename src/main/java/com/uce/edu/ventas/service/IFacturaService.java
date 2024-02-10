@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.uce.edu.ventas.repository.modelo.Cliente;
 import com.uce.edu.ventas.repository.modelo.Factura;
-import com.uce.edu.ventas.repository.modelo.dto.FacturaDTO;
 
 public interface IFacturaService {
 	public Factura buscarPorNumero(String numero);
@@ -15,8 +14,14 @@ public interface IFacturaService {
 
 	public void borrar(Integer id);
 
-	public List<FacturaDTO> buscarFacturasDTO();
+	public List<Factura> buscarFacturas();
 
 	public void prueba();
+
+	public void pruebaSupport();
+
+	// public void pruebaSupport2();
+
+	public void pruebaNever();
 
 }
