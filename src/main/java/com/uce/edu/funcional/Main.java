@@ -31,6 +31,10 @@ public class Main {
 		System.out.println(supplierLambda3.getId());
 		
 		//Métodos referenciados
+		System.out.println("Métodos referenciados:");
+		MetodosReferenciados met =new MetodosReferenciados();
+		IPersonaSupplier<String> supplierLambda4 = met :: obetenerId;
+		System.out.println(supplierLambda4.getId());
 		
 		//2. Consumer
 		System.out.println("\n"+"---- CONSUMER ----");
@@ -47,6 +51,11 @@ public class Main {
 		};
 		consumerLambda.accept("Profesor");
 		
+		//Métodos referenciados
+		System.out.println("Métodos referenciados:");
+		IPersonaConsumer<String> consumer2 = met :: procesar;
+		consumer2.accept("Erika referenciado");
+		
 		//3. Predicate
 		System.out.println("\n"+"---- PREDICATE ----");
 		//Lambdas
@@ -56,6 +65,67 @@ public class Main {
 		
 		IPersonaPredicate<String> predicateLambda2 = letra -> "Erika".contains(letra);
 		System.out.println(predicateLambda2.evaluar("E"));
-	}
+		
+		//Métodos referenciados
+		System.out.println("Métodos referenciados:");
+		IPersonaPredicate<String> predicate2 =met:: evaluar;
+		System.out.println(predicate2.evaluar("c"));
+		
+		IPersonaPredicate<Integer> predicate3 =met:: procesar;
+		System.out.println(predicate3.evaluar(8));
+		
+		//4. Function
+		System.out.println("\n"+"---- FUNCTION ----");
+		//Lambdas	
+		System.out.println("Lambdas:");
+		IPersonaFunction<String,Integer> functionLambda = numero -> {
+			numero = numero+ Integer.valueOf(10);
+			String numeroString = numero.toString().concat("-Valor");
+			return numeroString;
+		};	
+		System.out.println(functionLambda.aplicar(7));
+		
+		IPersonaFunction<Empleado, Ciudadano> functionLambda1 = ciudadano -> {
+			Empleado empl = new Empleado();
+			empl.setNombreCompleto(ciudadano.getNombre() + "" + ciudadano.getApellido());
+			if(ciudadano.getProvincia().compareTo("Pichincha") == 0) {
+				empl.setPais("Ecuador");
+			}
+			return empl;
+		};
+		Ciudadano ciud = new Ciudadano();
+		ciud.setApellido("Gualoto");
+		ciud.setNombre("Erika");
+		ciud.setProvincia("Pichincha");
+		
+		Empleado empl= functionLambda1.aplicar(ciud);
+		System.out.println(empl);
+		
+		//Métodos referenciados
+		System.out.println("Métodos referenciados:");
+		Empleado empl2 = new Empleado();
+		empl2.setNombreCompleto("Daniel Tobar");
+		empl2.setPais("Ecuador");
+		
+		IPersonaFunction<Ciudadano, Empleado> function1 = met ::cambiar;		
+		Ciudadano ciud2 = function1.aplicar(empl2);
+		System.out.println(ciud2);
+		
+		//5. Unary Operator
+		System.out.println("\n"+"---- UNARY OPERATOR ----");
+		//Lambdas	
+		System.out.println("Lambdas:");
+		IPersonaUnaryOperator<Integer> unaryOperatorLambda = numero -> numero + (numero*2);
+		System.out.println(unaryOperatorLambda.aplicar(14));
+		
+		IPersonaUnaryOperatorFunction<Integer> unaryOperatorLambda2 = numero -> numero + (numero*2);
+		System.out.println(unaryOperatorLambda2.aplicar(10));
+		
 
+		//Métodos referenciados
+		System.out.println("Métodos referenciados:");
+		IPersonaUnaryOperatorFunction<Empleado> unary3 = met:: procesar;
+		Empleado empl3 = unary3.aplicar(empl2);
+		System.out.println(empl3);
+		}
 }
