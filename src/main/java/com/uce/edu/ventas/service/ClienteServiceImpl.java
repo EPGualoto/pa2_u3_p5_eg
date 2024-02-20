@@ -1,5 +1,7 @@
 package com.uce.edu.ventas.service;
 
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
@@ -20,10 +22,25 @@ public class ClienteServiceImpl implements IClienteService {
 	// begin
 	public void guardar(Cliente cliente) {
 		// TODO Auto-generated method stub
+		System.out.println("Nombre Hilo: " + Thread.currentThread().getName());
+		
 		try {
+			//Buscar en el registro civil
+			//Validar que no tiene deudas
+			//Validar
+			//
+			
 			this.iClienteRepository.insertar(cliente);
+			try {
+				TimeUnit.SECONDS.sleep(1);
+			} catch (Exception e) {
+				// TODO: handle exception
+				e.printStackTrace();
+			}
 		} catch (Exception e) {
-			System.out.println("ERROR");
+			System.out.println(e.getClass());
+			//No propaga hacia arriba
+			//System.out.println("ERROR");
 		}
 		// commit
 	}
